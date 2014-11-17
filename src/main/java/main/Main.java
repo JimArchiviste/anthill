@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+import mails.Message;
 import places.Anthill;
 
 public class Main {
@@ -17,21 +18,21 @@ public class Main {
 
 		//Do all the cycles
 		for (int i = 0 ; i < nbCycle ; i++) {
-			System.out.println("------------ Start of a new cycle #" + i + " ------------");
+			System.out.println("------------ Start of a new cycle #" + (i+1) + " ------------\n");
 			int j  = 1;
 			//Each anthill does a cycle
 			for (Anthill anthill : anthills) {
 				System.out.println("------------ Anthill n°" + j + " ------------" );
 				//The anthill does what it has to do
 				anthill.newCycle(i);
-				System.out.println("------------ Management of the messages ------------");
+				System.out.println("== Management of the messages");
 				//All the messages for the anthill are managed
 				while (!anthill.getMessageBox().isEmpty()) {
 					Message m = anthill.getMessageBox().getNextMessage();
-					m.acton();
+					m.action();
 				}
 				
-				System.out.println("------------ End of the messages ------------");
+				System.out.println("== End of the messages\n");
 			}
 			System.out.println("------------ End of the cycle ------------\n\n");
 		}
