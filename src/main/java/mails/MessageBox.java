@@ -19,4 +19,8 @@ public class MessageBox {
 		return messages.get(0);
 	}
 
+	public void deleteMessage() {
+		messages.remove(0);
+	}
+
 }

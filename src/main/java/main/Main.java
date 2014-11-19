@@ -30,11 +30,18 @@ public class Main {
 				while (!anthill.getMessageBox().isEmpty()) {
 					Message m = anthill.getMessageBox().getNextMessage();
 					m.action();
+					anthill.getMessageBox().deleteMessage();
 				}
 				
 				System.out.println("== End of the messages\n");
 			}
 			System.out.println("------------ End of the cycle ------------\n\n");
+			
+			try {
+				Thread.sleep(50000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
