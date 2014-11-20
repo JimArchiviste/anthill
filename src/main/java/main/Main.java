@@ -22,7 +22,7 @@ public class Main {
 			int j  = 1;
 			//Each anthill does a cycle
 			for (Anthill anthill : anthills) {
-				System.out.println("------------ Anthill nÂ°" + j + " ------------" );
+				System.out.println("------------ Anthill n°" + j + " ------------" );
 				//The anthill does what it has to do
 				anthill.newCycle(i);
 				System.out.println("== Management of the messages");
@@ -38,7 +38,7 @@ public class Main {
 			System.out.println("------------ End of the cycle ------------\n\n");
 			
 			try {
-				Thread.sleep(50000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

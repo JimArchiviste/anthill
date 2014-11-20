@@ -1,24 +1,31 @@
 package ants;
 
+import places.*;
+
 public abstract class Ant {
 
 	protected int life;
 	protected Position position;
+	protected int speed;
+	protected Anthill anthill;
 	
-	public Ant () {
+	public Ant (Anthill anthill) {
 		this.life = 100;
+		this.speed = 1;
+		this.anthill = anthill;
 	}
 	
-	public int getLife() {
-		return this.life;
+	public void goToSite(Site site) {
+		this.position = new Position(site, this.speed);
 	}
 	
-	public void goForward(int position) {
-		this.position.add(position);
+	protected void goForward() {
+		this.position.add(this.speed);
 	}
 	
-	public void goBack(int position) {
-		this.position.remove(position);
+	protected void goBack() {
+		this.position.remove(this.speed);
 	}
 
+	public abstract boolean moveOn();
 }
