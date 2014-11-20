@@ -97,9 +97,7 @@ public class Anthill {
 			this.inactive_ants.get(1).add(ant);
 		}
 		//Healer
-		for (Ant ant : this.inactive_ants.get(2)) {
-
-			
+		for (Ant ant : this.inactive_ants.get(2)) {			
 		}
 	}
 
@@ -115,6 +113,10 @@ public class Anthill {
 	}
 	public void addFood(int food) {
 		this.food = food;
+	}
+
+	public Site getAvailableSite() {
+		return this.availableSite;
 	}
 
 }

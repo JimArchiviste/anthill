@@ -30,6 +30,10 @@ public class Worker extends Ant {
 				}
 				this.position.setCome();
 			}
+			else if (!this.position.getSite().equals(this.anthill.getAvailableSite())) {
+				goBack();
+				this.position.setCome();
+			}
 			else goForward();
 		}
 		else {

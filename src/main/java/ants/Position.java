@@ -38,4 +38,8 @@ public class Position {
 	public void setCome() {
 		this.come ^= true;
 	}
+
+	public void setPosition(int position) {
+		this.position = position;		
+	}
 }
