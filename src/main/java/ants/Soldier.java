@@ -11,6 +11,24 @@ public class Soldier extends Ant {
 
 	@Override
 	public boolean moveOn() {
+		if (this.position.getCome()) {
+			if (this.position.getPosition() == this.position.getSite().getDistance()) {
+				this.position.setCome();
+			}
+			else goForward();
+			
+			if (this.position.getPosition() > this.position.getSite().getDistance()) {
+				goBack();
+				this.position.setCome();
+			}
+		}
+		else {
+			goBack();
+			if (this.position.getPosition() == 0) {
+				this.position.setCome();
+				return true;
+			}
+		}
 		return false;		
 	}
 

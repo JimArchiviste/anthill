@@ -34,4 +34,8 @@ public class Position {
 	public void remove(int position) {
 		this.position -= position;
 	}
+
+	public void setCome() {
+		this.come ^= true;
+	}
 }

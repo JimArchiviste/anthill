@@ -15,26 +15,28 @@ public class Worker extends Ant {
 	
 	@Override
 	public boolean moveOn() {
-		if (this.position.getPosition() == this.position.getSite().getDistance()) {
-			int food_taken = this.position.getSite().reduceAmount(this.capacity);
-			if (food_taken == 0) {
-				this.food = food_taken;
+		if (this.position.getCome()) {
+			if (this.position.getPosition() == this.position.getSite().getDistance()) {
+				int food_taken = this.position.getSite().reduceAmount(this.capacity);
+				if (food_taken == 0) {
+					this.food = food_taken;
+				}
+				else if (food_taken == -1) {
+					goBack();
+					//TODO Messages management
+				}
+				else {
+					this.food = food_taken;
+				}
+				this.position.setCome();
 			}
-			else if (food_taken == -1) {
-				goBack();
-				//TODO Messages management
-			}
-			else {
-				this.food = food_taken;
-			}
+			else goForward();
 		}
 		else {
-			if (this.position.getCome()){
-				goForward();
-			}
-			else {
-				goBack();
-				if (this.position.getPosition() == 0) return true;
+			goBack();
+			if (this.position.getPosition() == 0) {
+				this.position.setCome();
+				return true;
 			}
 		}
 		return false;

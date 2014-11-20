@@ -12,6 +12,8 @@ public class Anthill {
 	private ArrayList<ArrayList<Ant>> active_ants;
 	private MessageBox messagebox;
 	private ArrayList<Site> sites;
+	private int food;
+	private Site availableSite;
 	
 	public Anthill (int nbCycle) {
 		this.queen = new Queen(this, nbCycle);
@@ -27,6 +29,8 @@ public class Anthill {
 			Site site = new Site(i);
 			sites.add(site);
 		}
+		this.food = 0;
+		this.availableSite = this.sites.get(0);
 	}
 
 	public void newCycle(int cycle) {
@@ -51,7 +55,7 @@ public class Anthill {
 		while (!this.inactive_ants.get(0).isEmpty()) {
 			if (this.inactive_ants.get(0).isEmpty()) break;
 			Ant that = this.inactive_ants.get(0).get(0);
-			that.goToSite(this.availableSite());
+			that.goToSite(this.availableSite);
 			temporary_ants.get(0).add(that);
 			this.inactive_ants.get(0).remove(0);
 		}
@@ -67,13 +71,31 @@ public class Anthill {
 		inactives = new ArrayList<Ant>();
 		temporary_ants.add(actives);
 		temporary_ants.add(inactives);
-		/**for (int i = 0; i < this.inactives_ants.get(1).size();) {
-			for (Site site : this.sites) {
-				if (i == this.inactives_ants.get(1).size()) break;
-				this.inactives_ants.get(1).get(i).goToSite(site);
-				i++;
+		while (!this.active_ants.get(1).isEmpty()) {
+			Ant that = this.active_ants.get(1).get(0);
+			if(!that.moveOn()){
+				//active
+				temporary_ants.get(0).add(that);
 			}
-		}**/
+			else {
+				//inactive
+				temporary_ants.get(1).add(that);
+			}
+			this.active_ants.get(1).remove(0);
+		}
+		while (!this.inactive_ants.get(1).isEmpty()) {
+			if (this.inactive_ants.get(1).isEmpty()) break;
+			Ant that = this.inactive_ants.get(1).get(0);
+			that.goToSite(this.availableSite);
+			temporary_ants.get(1).add(that);
+			this.inactive_ants.get(1).remove(0);
+		}
+		for (Ant ant : temporary_ants.get(0)) {
+			this.active_ants.get(1).add(ant);
+		}
+		for (Ant ant : temporary_ants.get(1)) {
+			this.inactive_ants.get(1).add(ant);
+		}
 		//Healer
 		for (Ant ant : this.inactive_ants.get(2)) {
 
@@ -81,15 +103,18 @@ public class Anthill {
 		}
 	}
 
-	private Site availableSite() {
+	/**private Site availableSite() {
 		for (Site site : this.sites) {
 			if (site.getAmount() > 0) return site;
 		}
 		return null;
-	}
+	}**/
 
 	public MessageBox getMessageBox() {
 		return this.messagebox;
+	}
+	public void addFood(int food) {
+		this.food = food;
 	}
 
 }
